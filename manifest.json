@@ -1,0 +1,40 @@
+{
+    "manifestVersion": 2,
+    "id"            : "miniflux.services",
+    "displayName"   : "Miniflux Services",
+    "desc"          : "Miniflux RSS Pipeline Services",
+    "version"       : "1.0",
+    "author"        : "Kilroy.tech",
+    "authorInfoUrl" : "http://kilroy.tech",
+    "appInfoUrl"    : "/apps/miniflux.services/index.html",
+    "appImageUrl"   : "/apps/miniflux.services/logo.png",
+    "locked"        : true,
+    "override"      : true,
+    "hidden"        : false,
+    "pdClasses"     : {
+        "config"    : {
+            "pdName" : "config",
+            "pdAlias": "miniflux.services.config",
+            "desc"  : " Miniflux Services Configuration",
+            "runOnStart": true,
+            "visible": true,
+            "multipleAllowed": false,
+            "init"  : "init_hook",
+            "resume": "resume_hook",
+            "pause" : "pause_hook",
+            "stop"  : "stop_hook"
+        },
+        "chat_agent"    : {
+            "pdName" : "chat_agent",
+            "pdAlias": "miniflux.services.chat_agent",
+            "desc"  : "Miniflux Chat Agent",
+            "runOnStart": false,
+            "visible": true,
+            "multipleAllowed": true,
+            "init"  : "init_hook",
+            "resume": "resume_hook",
+            "pause" : "pause_hook",
+            "stop"  : "stop_hook"
+        }
+    }
+}

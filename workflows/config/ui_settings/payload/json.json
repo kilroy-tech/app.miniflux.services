@@ -1,0 +1,183 @@
+{
+    "name": "miniflux.services/config/ui_settings",
+    "version": "1",
+    "description": "",
+    "isInteractive": true,
+    "clean_up": true,
+    "inputs": [],
+    "outputs": [
+        "ta_.*"
+    ],
+    "args": {
+        "role": "*"
+    },
+    "steps": [
+        {
+            "operation": "set_value",
+            "isServer": true,
+            "args": {
+                "variable": "wfCleanupFlag",
+                "value": "1"
+            }
+        },
+        {
+            "operation": "step_group",
+            "isServer": true,
+            "args": {
+                "role": "*",
+                "message": "",
+                "timer": "24",
+                "isInteractive": true,
+                "canTerminate": true,
+                "success": [
+                    {
+                        "operation": "set_var_to",
+                        "isServer": true,
+                        "args": {
+                            "var_name": "formData",
+                            "push_array_name": null,
+                            "field_name": null,
+                            "var_expr": {
+                                "type": "value",
+                                "arg": {}
+                            }
+                        }
+                    },
+                    {
+                        "operation": "set_var_to",
+                        "isServer": true,
+                        "args": {
+                            "var_name": "formData",
+                            "push_array_name": null,
+                            "field_name": "ta_agent_name",
+                            "var_expr": {
+                                "type": "variable",
+                                "arg": "ta_agent_name"
+                            }
+                        }
+                    },
+                    {
+                        "operation": "set_var_to",
+                        "isServer": true,
+                        "args": {
+                            "var_name": "formData",
+                            "push_array_name": null,
+                            "field_name": "ta_swarm",
+                            "var_expr": {
+                                "type": "variable",
+                                "arg": "ta_swarm"
+                            }
+                        }
+                    },
+                    {
+                        "operation": "set_var_to",
+                        "isServer": true,
+                        "args": {
+                            "var_name": "formData",
+                            "push_array_name": null,
+                            "field_name": "ta_api_key",
+                            "var_expr": {
+                                "type": "variable",
+                                "arg": "ta_api_key"
+                            }
+                        }
+                    },
+                    {
+                        "operation": "set_var_to",
+                        "isServer": true,
+                        "args": {
+                            "var_name": "old_swarm",
+                            "push_array_name": null,
+                            "field_name": null,
+                            "var_expr": {
+                                "type": "variable",
+                                "arg": "ta_swarm"
+                            }
+                        }
+                    },
+                    {
+                        "operation": "display_inline_form",
+                        "isServer": false,
+                        "args": {
+                            "formID": "default",
+                            "form": {
+                                "formPanels": [
+                                    {
+                                        "name": "Miniflux Agent Settings",
+                                        "description": "",
+                                        "sections": [
+                                            {
+                                                "fields": [
+                                                    {
+                                                        "name": "ta_agent_name",
+                                                        "type": "text",
+                                                        "label": "Agent name",
+                                                        "placeholder": ""
+                                                    },
+                                                    {
+                                                        "name": "ta_swarm",
+                                                        "type": "text",
+                                                        "label": "Public swarm name",
+                                                        "placeholder": ""
+                                                    },
+                                                    {
+                                                        "name": "ta_api_key",
+                                                        "type": "text",
+                                                        "label": "Webhook URL API Token",
+                                                        "placeholder": ""
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "success": [
+                                {
+                                    "operation": "if_then_else",
+                                    "isServer": true,
+                                    "args": {
+                                        "condition": "\"${ta_swarm}\" != \"${old_swarm}\"",
+                                        "success": [
+                                            {
+                                                "operation": "swarm_command",
+                                                "isServer": true,
+                                                "args": {
+                                                    "command": "leave",
+                                                    "command_args": {
+                                                        "topic": "${old_swarm}"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "operation": "swarm_command",
+                                                "isServer": true,
+                                                "args": {
+                                                    "command": "join",
+                                                    "command_args": {
+                                                        "topic": "${ta_swarm}",
+                                                        "alias": "${process_diagram_id}",
+                                                        "webhook": "swarm_noop",
+                                                        "seed": ""
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "failure": []
+                                    }
+                                }
+                            ],
+                            "failure": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "operation": "end",
+            "isServer": true,
+            "args": null
+        }
+    ],
+    "externalForms": {}
+}

@@ -1,2 +1,2 @@
 # app.miniflux.services
-Agent services for Miniflux integration with Kilroy
+Kilroy app widgets and webhooks for Miniflux integration
