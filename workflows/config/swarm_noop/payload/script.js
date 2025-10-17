@@ -16,7 +16,7 @@ const appRoot = global.REBAR_NAMESPACE.__base; //require ('app-root-path');
 
 function preflight(authData, wfProxy) {
 	//called before the workflow steps run
-    debug ("preflight");
+    //debug ("preflight");
 	return Promise.resolve({success: true});
 }
 
@@ -67,7 +67,7 @@ function end (authData, wfProxy, step, formData) {
 //-----------------------------------------------------
 
 function postflight(authData, wfProxy) {
-    debug ("postflight");
+    //debug ("postflight");
     return Promise.resolve({success: true});
 }
 
