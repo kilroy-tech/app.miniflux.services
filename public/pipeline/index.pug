@@ -7,7 +7,7 @@ block external_cdn_scripts
     script(src="/apps/kilroy.utils/lib/jquery/3.7.1/jquery.min.js")
     script(src="/apps/kilroy.utils/lib/jquery-ui/1.12.1/jquery-ui.min.js")
     script(src="/apps/kilroy.utils/lib/bootstrap/5.3.8/js/bootstrap.bundle.min.js")
-    script(src="/apps/kilroy.utils/lib/gojs/4.0.3/release/go.js")
+    script(src="/apps/kilroy.utils/lib/kilroy-canvas/0.1.0/kilroy-canvas.min.js")
     
 block inline_styles
     style.
@@ -28,9 +28,9 @@ block content
                     #pd-palette-area-1.palette-area.bg-white(style="min-height: 240px !important;")
 
 block static_scripts
-    script(src="./js/static/LocalStorageCommandHandler.js")
+    script(src="/apps/kilroy.utils/lib/kilroy-canvas/0.1.0/kilroy-canvas-clipboard.min.js")
 
 block custom_scripts
-    script(src="./js/Figures.js")
+    script(src="/apps/kilroy.utils/lib/kilroy-canvas/0.1.0/kilroy-canvas-figures.min.js")
     script(src="./js/palette_defs.js")
     script(src="./js/pipeline_palette_impl.js")
